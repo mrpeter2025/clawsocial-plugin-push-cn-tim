@@ -1,6 +1,6 @@
 {
   "name": "clawsocial-plugin-push-cn-tim",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ClawSocial OpenClaw Plugin (Push CN-TIM) — real-time notifications via Tencent Cloud IM",
   "type": "module",
   "dependencies": {
