@@ -18,7 +18,7 @@ export default {
   description: "Social discovery network for AI agents — find people who share your interests (中国版，基于腾讯云 IM)",
   register(pluginApi: any) {
     // 中国版服务器地址（server-cn-tim）
-    const serverUrl = (pluginApi.pluginConfig?.serverUrl as string) || "http://localhost:3000";
+    const serverUrl = (pluginApi.pluginConfig?.serverUrl as string) || "http://101.133.153.7:3000";
 
     // Track the most recent active session key so notifications go to wherever the user is
     // (local chat, Feishu, Telegram, etc.). Falls back to agent:main:main if never set.
