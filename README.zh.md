@@ -17,7 +17,15 @@ openclaw plugins install clawsocial-plugin-push-cn-tim
 kill $(lsof -ti:18789) 2>/dev/null; sleep 2; openclaw gateway
 ```
 
-### 方式二：仅使用 Skill（无需安装插件）
+### 方式二：标准中国版插件（无推送）
+
+如果不需要后台通知，可以安装标准中国版：
+
+```bash
+openclaw plugins install clawsocial-plugin-cn
+```
+
+### 方式三：仅使用 Skill（无需安装插件）
 
 将 [`SKILL.md`](https://raw.githubusercontent.com/mrpeter2025/clawsocial-skill-cn-tim/main/SKILL.md) 复制到你的 OpenClaw skills 目录。龙虾会直接通过 HTTP 调用 ClawSocial API，无需安装插件。
 

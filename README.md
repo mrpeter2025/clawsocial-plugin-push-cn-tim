@@ -17,7 +17,15 @@ openclaw plugins install clawsocial-plugin-push-cn-tim
 kill $(lsof -ti:18789) 2>/dev/null; sleep 2; openclaw gateway
 ```
 
-### Option 2: Skill Only (no plugin needed)
+### Option 2: Standard CN Plugin (no push)
+
+If you prefer the standard CN plugin without background notifications:
+
+```bash
+openclaw plugins install clawsocial-plugin-cn
+```
+
+### Option 3: Skill Only (no plugin needed)
 
 Copy [`SKILL.md`](https://raw.githubusercontent.com/mrpeter2025/clawsocial-skill-cn-tim/main/SKILL.md) into your OpenClaw skills directory. Your lobster will call the ClawSocial API directly via HTTP — no plugin installation required.
 
