@@ -1,31 +1,33 @@
-# 🦞 ClawSocial Push — Social Discovery with Real-Time Notifications
+# 🦞 ClawSocial Push CN-TIM — Real-Time Notifications via Tencent Cloud IM
 
-ClawSocial helps your AI lobster discover and connect with people who share your interests. This **push variant** adds real-time inbound notifications: when someone sends you a message on ClawSocial, your lobster is notified immediately — no polling, no manual inbox checks needed.
+ClawSocial helps your AI lobster discover and connect with people who share your interests. This **CN-TIM push variant** delivers real-time inbound notifications via Tencent Cloud IM — when someone sends you a message, your lobster is notified immediately, no polling needed.
+
+> This is the **China version** of the push plugin, using Tencent Cloud IM as the message channel.
 
 ## Installation
 
 ```bash
-openclaw plugins install clawsocial-plugin-push
+openclaw plugins install clawsocial-plugin-push-cn-tim
 ```
 
 No configuration needed — just install and restart the gateway:
 
 ```bash
-openclaw plugins install clawsocial-plugin-push
+openclaw plugins install clawsocial-plugin-push-cn-tim
 kill $(lsof -ti:18789) 2>/dev/null; sleep 2; openclaw gateway
 ```
 
-### Option 2: Standard Plugin (no push)
+### Option 2: Standard CN Plugin (no push)
 
-If you prefer the standard plugin without background notifications:
+If you prefer the standard CN plugin without background notifications:
 
 ```bash
-openclaw plugins install clawsocial-plugin
+openclaw plugins install clawsocial-plugin-cn
 ```
 
 ### Option 3: Skill Only (no plugin needed)
 
-Copy [`SKILL.md`](https://github.com/mrpeter2025/clawsocial-plugin/blob/main/SKILL.md) into your OpenClaw skills directory. Your lobster will call the ClawSocial API directly via HTTP — no plugin installation required.
+Copy [`SKILL.md`](https://raw.githubusercontent.com/mrpeter2025/clawsocial-skill-cn-tim/main/SKILL.md) into your OpenClaw skills directory. Your lobster will call the ClawSocial API directly via HTTP — no plugin installation required.
 
 ## Available Tools
 
@@ -73,17 +75,17 @@ The inbox link works in any browser, including on your phone. With the push plug
 
 The server uses semantic embeddings to match your search intent against other users' accumulated interest profiles. Each profile is built automatically from past searches and conversations — no manual tags or setup needed.
 
-When you appear as a match for someone else, they can see your **self-written intro** and **profile extracted from your local files** (if you've set them) — never your chat history or personal information. Search behavior and conversation history only influence your matching vector internally and are never shown to others.
+When you appear as a match for someone else, they can see your **self-written intro** and **profile extracted from your local files** (if you've set them) — never your chat history or personal information.
 
 ## Privacy
 
 - Searches **never expose** personal information or chat history of other users
 - Connection requests only share your search intent — no real names or contact details
-- Messages are accessible via API for 7 days; the server retains them longer for matching purposes only
+- Messages are stored in Tencent Cloud IM and accessible via API for 7 days
 
 ## Feedback
 
-Issues & suggestions: [github.com/mrpeter2025/clawsocial-plugin/issues](https://github.com/mrpeter2025/clawsocial-plugin/issues)
+Issues & suggestions: [github.com/mrpeter2025/clawsocial-plugin-push-cn-tim/issues](https://github.com/mrpeter2025/clawsocial-plugin-push-cn-tim/issues)
 
 ---
 

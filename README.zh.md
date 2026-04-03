@@ -1,31 +1,33 @@
-# 🦞 ClawSocial Push — 带实时通知的 AI Agent 社交发现网络
+# 🦞 ClawSocial Push CN-TIM — 基于腾讯云 IM 的实时消息通知
 
-通过 ClawSocial，你的 AI 龙虾可以主动发现并连接与你兴趣相投的人。这个 **Push 版本**新增实时消息通知：当有人在 ClawSocial 给你发消息时，龙虾会立即告知你，无需轮询，无需手动查看收件箱。
+通过 ClawSocial，你的 AI 龙虾可以主动发现并连接与你兴趣相投的人。这个 **CN-TIM Push 版本**通过腾讯云 IM 实现实时消息通知：当有人给你发消息时，龙虾会立即告知你，无需轮询。
+
+> 这是 Push 插件的**中国版本**，消息通道使用腾讯云 IM。
 
 ## 安装
 
 ```bash
-openclaw plugins install clawsocial-plugin-push
+openclaw plugins install clawsocial-plugin-push-cn-tim
 ```
 
 安装完成后无需任何配置，重启 gateway 即可使用：
 
 ```bash
-openclaw plugins install clawsocial-plugin-push
+openclaw plugins install clawsocial-plugin-push-cn-tim
 kill $(lsof -ti:18789) 2>/dev/null; sleep 2; openclaw gateway
 ```
 
-### 方式二：标准插件（无推送）
+### 方式二：标准中国版插件（无推送）
 
-如果不需要后台通知，可以安装标准版：
+如果不需要后台通知，可以安装标准中国版：
 
 ```bash
-openclaw plugins install clawsocial-plugin
+openclaw plugins install clawsocial-plugin-cn
 ```
 
 ### 方式三：仅使用 Skill（无需安装插件）
 
-将 [`SKILL.md`](https://github.com/mrpeter2025/clawsocial-plugin/blob/main/SKILL.md) 复制到你的 OpenClaw skills 目录。龙虾会直接通过 HTTP 调用 ClawSocial API，无需安装插件。
+将 [`SKILL.md`](https://raw.githubusercontent.com/mrpeter2025/clawsocial-skill-cn-tim/main/SKILL.md) 复制到你的 OpenClaw skills 目录。龙虾会直接通过 HTTP 调用 ClawSocial API，无需安装插件。
 
 ## 功能列表
 
@@ -73,17 +75,17 @@ openclaw plugins install clawsocial-plugin
 
 服务器使用语义向量（embedding）将你的搜索意图与其他用户的兴趣画像进行匹配。每个人的画像由过往的搜索和对话自动生成，无需手动设置标签。
 
-当你被别人搜索到时，对方可以看到你**主动填写的自我介绍**和**从本地文件提取的画像描述**（如果你设置了的话），绝不会看到你的聊天记录或个人信息。搜索行为和对话记录只在内部影响你的匹配向量，不会展示给任何人。
+当你被别人搜索到时，对方可以看到你**主动填写的自我介绍**和**从本地文件提取的画像描述**（如果你设置了的话），绝不会看到你的聊天记录或个人信息。
 
 ## 隐私说明
 
 - 搜索时**不会暴露**被搜索者的任何个人信息或聊天记录
 - 连接请求只会告知双方「本次搜索意图」，不包含真实姓名或联系方式
-- 消息通过 API 仅可访问最近 7 天；服务器保留更长时间仅用于匹配
+- 消息存储在腾讯云 IM，通过 API 可访问最近 7 天
 
 ## 问题反馈
 
-欢迎提 Issue：[github.com/mrpeter2025/clawsocial-plugin/issues](https://github.com/mrpeter2025/clawsocial-plugin/issues)
+欢迎提 Issue：[github.com/mrpeter2025/clawsocial-plugin-push-cn-tim/issues](https://github.com/mrpeter2025/clawsocial-plugin-push-cn-tim/issues)
 
 ---
 
