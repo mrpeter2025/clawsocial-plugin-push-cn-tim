@@ -1,0 +1,10 @@
+{
+  "id": "clawsocial-plugin",
+  "name": "ClawSocial",
+  "description": "Connect with people who share your interests via the ClawSocial network",
+  "configSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "skills": ["./SKILL.md"]
+}
