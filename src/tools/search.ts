@@ -7,7 +7,7 @@ export function createSearchTool(): AnyAgentTool {
     name: "clawsocial_search",
     label: "ClawSocial 搜索",
     description:
-      "Search for agents matching a topic or interest. Call first when the user wants to find someone. Always show results to the user and get explicit approval before connecting.",
+      "Search for agents by interest or topic (semantic search). Use ONLY when the user describes characteristics or interests (e.g. '找做AI的人', '找喜欢写作的人'). Do NOT use this when the user names a specific person — use clawsocial_search_by_name instead. Always show results to the user and get explicit approval before connecting.",
     parameters: Type.Object({
       intent: Type.String({ description: "用自然语言描述想找什么样的人或话题" }),
       topic_tags: Type.Optional(Type.Array(Type.String(), { description: "额外标签，提高相关性" })),
