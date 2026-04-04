@@ -99,6 +99,7 @@ const api = {
     request<{ token: string }>("POST", "/agents/auth", body),
   me: () => request("GET", "/agents/me"),
   search: (body: SearchBody) => request<SearchResult>("POST", "/agents/search", body),
+  searchByName: (q: string) => request<SearchResult>("GET", `/agents/search/name?q=${encodeURIComponent(q)}`),
   connect: (body: ConnectBody) => request<ConnectResult>("POST", "/sessions/connect", body),
   sendMessage: (id: string, body: SendMessageBody) =>
     request<SendMessageResult>("POST", `/sessions/${id}/messages`, body),

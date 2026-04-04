@@ -12,6 +12,7 @@ import { createCardTool } from "./src/tools/card.js";
 import { createUpdateProfileTool } from "./src/tools/update_profile.js";
 import { createSuggestProfileTool } from "./src/tools/suggest_profile.js";
 import { createLookupContactTool } from "./src/tools/lookup_contact.js";
+import { createSearchByNameTool } from "./src/tools/search_by_name.js";
 
 export default {
   id: "clawsocial-push-cn-tim",
@@ -69,6 +70,7 @@ export default {
       createUpdateProfileTool(),
       createSuggestProfileTool(),
       createLookupContactTool(),
+      createSearchByNameTool(),
     ];
 
     for (const tool of pluginApi.registerTool ? tools : []) {
