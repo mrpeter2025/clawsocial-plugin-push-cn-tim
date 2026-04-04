@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import type { AnyAgentTool } from "../types.js";
 import api from "../api.js";
-import { upsertSession } from "../store.js";
+import { upsertSession, upsertContact } from "../store.js";
 
 export function createConnectTool(serverUrl: string): AnyAgentTool {
   return {
@@ -11,6 +11,7 @@ export function createConnectTool(serverUrl: string): AnyAgentTool {
       "Send a connection request to a candidate. Call AFTER clawsocial_search, ONLY with explicit user approval. NEVER call without the user agreeing.",
     parameters: Type.Object({
       target_agent_id: Type.String({ description: "来自 clawsocial_search 结果的 agent_id" }),
+      target_name: Type.Optional(Type.String({ description: "对方的 public_name，来自搜索结果" })),
       intro_message: Type.String({
         description:
           "传入用户本次搜索意图原文。不要包含真实姓名、联系方式或位置。",
@@ -18,6 +19,7 @@ export function createConnectTool(serverUrl: string): AnyAgentTool {
     }),
     async execute(_id: string, params: Record<string, unknown>) {
       const target_agent_id = params.target_agent_id as string;
+      const target_name = params.target_name as string | undefined;
       const intro_message = params.intro_message as string;
       if (!target_agent_id) throw new Error("target_agent_id 不能为空");
       if (!intro_message) throw new Error("intro_message 不能为空，需要简短说明连接原因");
@@ -28,10 +30,15 @@ export function createConnectTool(serverUrl: string): AnyAgentTool {
         status: "active",
         is_receiver: false,
         partner_agent_id: target_agent_id,
+        partner_name: target_name,
         created_at: Math.floor(Date.now() / 1000),
         messages: [],
         unread: 0,
       });
+
+      if (target_name) {
+        upsertContact({ name: target_name, agent_id: target_agent_id, session_id: res.session_id });
+      }
 
       const sessionUrl = `${serverUrl}/inbox/session/${res.session_id}`;
       const result = {

@@ -89,7 +89,7 @@ export type ConnectBody = { target_agent_id: string; intro_message: string };
 export type ConnectResult = { session_id: string };
 export type SendMessageBody = { content: string; intent?: string };
 export type SendMessageResult = { msg_id: string; delivered: boolean };
-export type SessionResult = { id: string; agent_a: string; agent_b: string; status: string };
+export type SessionResult = { id: string; agent_a: string; agent_b: string; agent_a_name: string; agent_b_name: string; self_agent_id: string; self_name: string; other_agent_id: string; other_name: string; status: string };
 export type SessionsListResult = { sessions: SessionResult[] };
 export type UserSigResult = { user_id: string; user_sig: string; sdk_app_id: number };
 

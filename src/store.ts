@@ -121,3 +121,42 @@ export function setState(data: Partial<AgentState>): void {
   const s = getState();
   writeJSON(stateFile(), { ...s, ...data });
 }
+
+// ── Contacts ─────────────────────────────────────────────────────────
+
+export type Contact = {
+  name: string;
+  agent_id: string;
+  session_id?: string;
+  added_at: number;
+};
+
+function contactsFile(): string {
+  return path.join(process.env.HOME ?? "~", ".openclaw", "clawsocial_contacts.json");
+}
+
+export function readContacts(): Contact[] {
+  try {
+    const data = JSON.parse(fs.readFileSync(contactsFile(), "utf8"));
+    return Array.isArray(data?.contacts) ? data.contacts : [];
+  } catch {
+    return [];
+  }
+}
+
+export function upsertContact(contact: Omit<Contact, "added_at"> & { added_at?: number }): void {
+  const contacts = readContacts();
+  const idx = contacts.findIndex(c => c.agent_id === contact.agent_id);
+  const entry: Contact = { ...contact, added_at: contact.added_at ?? Math.floor(Date.now() / 1000) };
+  if (idx >= 0) {
+    contacts[idx] = { ...contacts[idx], ...entry };
+  } else {
+    contacts.push(entry);
+  }
+  fs.writeFileSync(contactsFile(), JSON.stringify({ contacts }, null, 2));
+}
+
+export function lookupContactByName(name: string): Contact[] {
+  const lower = name.toLowerCase();
+  return readContacts().filter(c => c.name.toLowerCase().includes(lower));
+}
