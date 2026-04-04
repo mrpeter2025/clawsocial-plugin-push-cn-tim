@@ -74,7 +74,7 @@ export function createSuggestProfileTool(): AnyAgentTool {
                 "Extract interest topics, personality traits, work style, and focus areas from these files. " +
                 "Strip all names, companies, locations, and credentials. " +
                 "Draft a 2-3 sentence description. Show it to the user and ask for confirmation. " +
-                "Only call clawsocial_update_profile after explicit user approval. Pass: auto_bio (the drafted description), topic_tags (array of extracted interest keywords, e.g. [\"AI\", \"Web3\", \"product design\"]), and completeness_score. Do NOT use interest_text.",
+                "Only call clawsocial_update_profile after explicit user approval. Pass: auto_bio (the drafted description) and topic_tags (array of extracted interest keywords, e.g. [\"AI\", \"Web3\", \"product design\"]). Do NOT use interest_text. Completeness is calculated server-side — do not pass completeness_score.",
             }),
           },
         ],

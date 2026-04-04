@@ -41,14 +41,6 @@ export function createUpdateProfileTool(): AnyAgentTool {
           description: "Discoverability: open (default), by-request, or closed",
         }),
       ),
-      completeness_score: Type.Optional(
-        Type.Number({
-          description:
-            "Profile completeness 0.0–1.0. Set based on how many local files were found: 0 files→0.1, 1→0.4, 2→0.7, 3→1.0",
-          minimum: 0,
-          maximum: 1,
-        }),
-      ),
     }),
     async execute(_id: string, params: Record<string, unknown>) {
       const state = getState();
@@ -71,7 +63,6 @@ export function createUpdateProfileTool(): AnyAgentTool {
       if (params.topic_tags) body.topic_tags = params.topic_tags;
       if (params.public_name) body.public_name = params.public_name;
       if (params.availability) body.availability = params.availability;
-      if (params.completeness_score != null) body.completeness_score = params.completeness_score;
 
       if (Object.keys(body).length === 0) {
         return {
