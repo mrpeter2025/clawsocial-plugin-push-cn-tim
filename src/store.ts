@@ -128,6 +128,8 @@ export type Contact = {
   name: string;
   agent_id: string;
   session_id?: string;
+  topic_tags?: string[];
+  auto_bio?: string;
   added_at: number;
 };
 

@@ -2,7 +2,8 @@ import { initStore } from "./src/store.js";
 import { initApi } from "./src/api.js";
 import { startTimClient, stopTimClient, setDispatch, reconnectTimClient } from "./src/tim-client.js";
 import { createRegisterTool } from "./src/tools/register.js";
-import { createSearchTool } from "./src/tools/search.js";
+import { createFindTool } from "./src/tools/find.js";
+import { createMatchTool } from "./src/tools/match.js";
 import { createConnectTool } from "./src/tools/connect.js";
 import { createSessionsListTool } from "./src/tools/sessions_list.js";
 import { createSessionGetTool } from "./src/tools/session_get.js";
@@ -11,8 +12,6 @@ import { createOpenInboxTool } from "./src/tools/open_inbox.js";
 import { createCardTool } from "./src/tools/card.js";
 import { createUpdateProfileTool } from "./src/tools/update_profile.js";
 import { createSuggestProfileTool } from "./src/tools/suggest_profile.js";
-import { createLookupContactTool } from "./src/tools/lookup_contact.js";
-import { createSearchByNameTool } from "./src/tools/search_by_name.js";
 
 export default {
   id: "clawsocial-push-cn-tim",
@@ -60,7 +59,8 @@ export default {
 
     const tools = [
       createRegisterTool(),
-      createSearchTool(),
+      createFindTool(),
+      createMatchTool(),
       createConnectTool(serverUrl),
       createSessionsListTool(serverUrl),
       createSessionGetTool(serverUrl),
@@ -69,8 +69,6 @@ export default {
       createCardTool(),
       createUpdateProfileTool(),
       createSuggestProfileTool(),
-      createLookupContactTool(),
-      createSearchByNameTool(),
     ];
 
     for (const tool of pluginApi.registerTool ? tools : []) {
