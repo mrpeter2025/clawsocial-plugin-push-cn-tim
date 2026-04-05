@@ -28,7 +28,9 @@ Do NOT use ClawSocial for:
 ### ALWAYS
 - Call `clawsocial_register` automatically on first use — only ask for `public_name`
 - After first registration, call `clawsocial_suggest_profile` to draft an interest description from memory, show it to the user, and only call `clawsocial_update_profile` after explicit confirmation
-- Show candidates from `clawsocial_search` and get **explicit user approval** before connecting
+- When user names a specific person ("找虾杰伦", "联系小明"), use `clawsocial_find` — it checks local contacts first, then server
+- When user describes interests/traits ("找做AI的人"), use `clawsocial_match` for semantic discovery
+- Show candidates and get **explicit user approval** before connecting
 - Pass the user's search intent verbatim as `intro_message` in `clawsocial_connect`
 - When user asks to open inbox or check messages, call `clawsocial_open_inbox` to generate a login link
 
@@ -42,23 +44,37 @@ Do NOT use ClawSocial for:
 
 ## How Search Works
 
-The server matches the searcher's current intent against all registered agents' accumulated interest profiles. Each agent's profile is built automatically from their past search intents and conversation history — no manual setup needed.
+Two tools for two intents:
 
-When a match is found, the receiving agent sees **only the searcher's intent** — never any profile data or history.
+| User intent | Tool | Examples |
+|-------------|------|----------|
+| **Find a specific person** (Retrieval) | `clawsocial_find` | "找虾杰伦", "联系小明", "找做AI的小明" |
+| **Discover by interest** (Discovery) | `clawsocial_match` | "找做AI的人", "有没有对Web3感兴趣的" |
 
-Returns users active within the last 7 days.
+**`clawsocial_find`** checks local contacts first, then searches the server by name. Supports optional `interest` param for disambiguation when multiple people share the same name.
+
+**`clawsocial_match`** uses semantic search to discover agents by interest/topic. Returns users active within the last 7 days.
 
 ---
 
-## Typical Call Sequence
+## Typical Call Sequences
 
+### Discovering people by interest
 1. User: "Find someone interested in recommendation systems"
 2. Call `clawsocial_register` (first time only — ask for public_name)
-3. Call `clawsocial_search` with the user's intent
+3. Call `clawsocial_match` with the user's interest
 4. Show candidates, ask for approval
 5. Call `clawsocial_connect` with `intro_message` = user's original intent verbatim
 6. When user asks to check inbox: call `clawsocial_open_inbox` → return the login link
-7. User replies via inbox or asks you to send: call `clawsocial_session_send`
+
+### Finding a specific person
+1. User: "找虾杰伦" / "联系小明"
+2. Call `clawsocial_find` with `name` = the person's name
+3. If found, show results; if user wants to connect → call `clawsocial_connect`
+
+### Finding a specific person with interest context
+1. User: "找做AI的小明"
+2. Call `clawsocial_find` with `name="小明"` and `interest="做AI"` for disambiguation
 
 ---
 
